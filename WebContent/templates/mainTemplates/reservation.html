@@ -1,0 +1,227 @@
+
+<div class="reservation-container glass-container">
+		<ul class="nav nav-tabs">
+			<li ng-class="{'active':makeReservationVm.select ==='true'}"><a href="#makeReservation" data-toggle="tab"><span class="label-font">Make a Reservation</span></a></li>
+			<li ng-class="{'active':editReservationVm.select ==='true'}"><a href="#editReservation" data-toggle="tab"><span class="label-font">Change Existing Reservation</span></a></li>
+			<li ng-class="{'active':cancelReservationVm.select ==='true'}"><a href="#cancelReservation" data-toggle="tab"><span class="label-font">Cancel Reservation</span></a></li>
+		</ul>
+	
+	<div class="tab-content adjust_top">
+	
+		<div class="tab-pane fade in" ng-class="{'active':makeReservationVm.select ==='true'}" id="makeReservation">
+		
+			<div ng-show="makeReservationVm.authFail"><p class="help-block">{{makeReservationVm.failMessage}}</p></div>
+			<div ng-hide="makeReservationVm.authFail"><p class="help-block">{{makeReservationVm.successMessage}}</p></div>
+			<div ng-hide="makeReservationVm.authFail"><p class="help-block"><strong>{{makeReservationVm.cnfCode}}</strong></p></div>
+			<div ng-hide="makeReservationVm.authFail"><p class="help-block"><strong>{{makeReservationVm.table_name}}</strong></p></div>
+		    <form role="form" name="reserveForm" novalidate ng-submit="makeReservationVm.submitForm(reserveForm.$valid)">
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveDate">Date :</label>
+		                    <input type="date" class="form-control" name="reserveDate" ng-model="makeReservationVm.reserve.date" id="reserveDate" placeholder="MM/DD/YYYY">
+		                    <div ng-show="reserveForm.reserveDate.$dirty" ng-messages="reserveForm.reserveDate.$error">
+				                <p ng-message="required" class="help-block">Date is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveTime">Time :</label>
+		                    <input type="time" class="form-control" name="reserveTime" ng-model="makeReservationVm.reserve.time_from" id="reserveTime" placeholder="HH:MM">
+		                    <div ng-show="reserveForm.reserveTime.$dirty" ng-messages="reserveForm.reserveTime.$error">
+				                <p ng-message="required" class="help-block">Time is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveName">Name :</label>
+		                    <input type="text" class="form-control" name="reserveName" ng-model="makeReservationVm.reserve.name" id="reserveName" placeholder="Enter your name">
+		                    <div ng-show="reserveForm.reserveName.$dirty" ng-messages="reserveForm.reserveName.$error">
+				                <p ng-message="required" class="help-block">Name is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveEmail">Email :</label>
+		                    <input type="email" class="form-control" name="reserveEmail" ng-model="makeReservationVm.reserve.email" id="reserveEmail" placeholder="Enter your email address">
+		                    <div ng-show="reserveForm.reserveEmail.$dirty" ng-messages="reserveForm.reserveEmail.$error">
+				                <p ng-message="required" class="help-block">Email is required!</p>
+				                <p ng-message="email" class="help-block">Email is invalid!</p>
+				            </div>		                
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reservePhone">Phone :</label>
+		                    <input type="tel" class="form-control" id="reservePhone" name="reservePhone" ng-model="makeReservationVm.reserve.phone" placeholder="Enter your phone number" ng-pattern="/^[0-9]{10}$/">
+		                    <div ng-show="reserveForm.reservePhone.$dirty" ng-messages="reserveForm.reservePhone.$error">
+				                <p ng-message="required" class="help-block">Phone is required!</p>
+				                <p ng-message="pattern" class="help-block">Phone number should be 10 digits!</p>
+				            </div>			                    
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-3">
+		                <div class="form-group">
+		                    <label for="reserveSize">Party Size :</label>
+		                    <input type="number" class="form-control" ng-model="makeReservationVm.reserve.no_of_people" name="reserveSize" id="reserveSize" placeholder="0">
+		                    <div ng-show="reserveForm.reserveSize.$dirty" ng-messages="reserveForm.reserveSize.$error">
+				                <p ng-message="required" class="help-block">Party size is required!</p>
+				            </div>			                
+		                </div>
+		            </div>
+		            <div class="col-sm-9">
+		                <div class="form-group">
+		                    <label for="reserveNeed">Special Arrangement :</label>
+		                    <input type="text" class="form-control" ng-model="makeReservationVm.reserve.special_arrangement" id="reserveNeed" placeholder="Birthday,Anniversary etc.">
+		                </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <button type="submit"  class="btn btn-primary btn-lg btn-block black-button" id="reserveButton" >Reserve</button>
+		            </div>
+		        </div>
+		
+		    </form>
+		</div>
+		
+		<div class=" tab-pane fade in" ng-class="{'active':editReservationVm.select ==='true'}" id="editReservation">
+				<div ng-show="editReservationVm.authfail"><p class="help-block">{{editReservationVm.message}}</p></div>
+				<div ng-show=" editReservationVm.editReserveDetails" class="editReserveDetails">
+				    <form role="form" name="editReserveDetails" ng-submit="editReservationVm.submitForm(editReserveDetails.$valid)">
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="custEmail">Your email address :</label>
+				                    <input type="email" class="form-control" id="custEmail" name="custEmail" placeholder="customer@gmail.com" ng-model="editReservationVm.details.email">
+				                     <div ng-show="editReserveDetails.custEmail.$dirty" ng-messages="editReserveDetails.custEmail.$error">
+						                <p ng-message="required" class="help-block">Email address is required!</p>
+						                <p ng-message="email" class="help-block">Email address is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				            <div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="cnfCode">Your confirmation code :</label>
+				                    <input type="text" class="form-control" id="cnfCode" name="cnfCode" placeholder="CNF#" ng-model="editReservationVm.details.cnfCode">
+				                    <div ng-show="editReserveDetails.cnfCode.$dirty" ng-messages="editReserveDetails.cnfCode.$error">
+						                <p ng-message="required" class="help-block">Confirmation code is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <button type="submit"  class="btn btn-primary btn-lg btn-block black-button" id="editReserveButton" >Submit</button>
+				            </div>
+				        </div>
+				    </form>
+				</div>
+				<div class="editReservePage" ng-show="editReservationVm.editReservePage">
+				<div ng-show="editReservationVm.authfail2"><p class="help-block">{{editReservationVm.message2}}</p></div>
+				<div ng-show="editReservationVm.authfail2"><p class="help-block">{{editReservationVm.confimationMessage}}</p></div>
+				<div ng-show="editReservationVm.authfail3"><p class="help-block">{{editReservationVm.message3}}</p></div>
+				     <form role="form" name="editReservePage" ng-submit="editReservationVm.editsubmitForm(editReservePage.$valid)" >
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="editDate">Date :</label>
+				                    <input type="date" class="form-control" ng-model="editReservationVm.details.date" name="editDate" id="editDate" placeholder="MM/DD/YYYY">
+				                     <div ng-show="editReservePage.editDate.$dirty" ng-messages="editReservePage.editDate.$error">
+						                	<p ng-message="required" class="help-block">Date is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				            <div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="editTime">Time :</label>
+				                    <input type="time" class="form-control"  ng-model="editReservationVm.details.time" name="editTime" id="editTime" placeholder="HH:MM">
+				                    <div ng-show="editReservePage.editTime.$dirty" ng-messages="editReservePage.editTime.$error">
+						                	<p ng-message="required" class="help-block">Time is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				        </div>
+				
+				        <div class="row">
+				
+				        </div>
+				
+				        <div class="row">
+				            <div class="col-sm-3">
+				                <div class="form-group">
+				                    <label for="editSize">Party Size :</label>
+				                    <input type="number" class="form-control" ng-model="editReservationVm.details.size" name="editSize" id="editSize" placeholder="0">
+				                    <div ng-show="editReservePage.editSize.$dirty" ng-messages="editReservePage.editSize.$error">
+						                <p ng-message="required" class="help-block">Party size is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				            <div class="col-sm-9">
+				                <div class="form-group">
+				                    <label for="editNeed">Special Arrangement :</label>
+				                    <input type="text" class="form-control" id="editNeed" name="editNeed" ng-model="editReservationVm.details.special_arrangement" placeholder="Birthday,Anniversary etc.">
+				                </div>
+				            </div>
+				        </div>
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <button type="submit"  class="btn btn-primary btn-lg btn-block black-button" name="editButton" >Edit Reservation</button>
+				            </div>
+				        </div>
+				
+				    </form>
+				</div>
+
+		</div>
+		
+		<div class="tab-pane fade in" ng-class="{'active':cancelReservationVm.select ==='true'}" id="cancelReservation">
+					<div ng-show="cancelReservationVm.authfail"><p class="help-block">{{cancelReservationVm.message}}</p></div>
+				    <form role="form" name="cancelReservation" ng-submit="cancelReservationVm.submitForm(cancelReservation.$valid)">
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="custEmail">Your email address :</label>
+				                    <input type="email" class="form-control" id="custEmail" name="custEmail" ng-model="cancelReservationVm.details.email" placeholder="customer@gmail.com">
+				    				<div ng-show="cancelReservation.custEmail.$dirty" ng-messages="cancelReservation.custEmail.$error">
+						                <p ng-message="required" class="help-block">Email address is required!</p>
+						                <p ng-message="email" class="help-block">Email address is required!</p>
+						            </div>
+				                </div>
+				             </div>
+				          	<div class="col-sm-6">
+				                <div class="form-group">
+				                    <label for="cnfCode">Your confirmation code :</label>
+				                    <input type="text" class="form-control" id="cnfCode" name="cnfCode" ng-model="cancelReservationVm.details.cnfCode" placeholder="CNF#">
+				                    <div ng-show="cancelReservation.cnfCode.$dirty" ng-messages="cancelReservation.cnfCode.$error">
+						                <p ng-message="required" class="help-block">Confirmation code is required!</p>
+						            </div>
+				                </div>
+				            </div>
+				        </div>
+				        <div class="row">
+				            <div class="col-sm-6">
+				                <button type="submit"  class="btn btn-primary btn-lg btn-block black-button" id="cancelReserveButton" >Cancel Reservation</button>
+				            </div>
+				        </div>
+				    </form>
+		</div>
+		
+	</div>
+</div>

@@ -1,0 +1,306 @@
+body {
+    background-image: linear-gradient(to bottom,#30F2F2,#FCFCFC);
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+}
+
+.overlay {
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background-color:rgba(0, 0, 0, 0.85);
+    background: url(data:;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAABl0RVh0U29mdHdhcmUAUGFpbnQuTkVUIHYzLjUuNUmK/OAAAAATSURBVBhXY2RgYNgHxGAAYuwDAA78AjwwRoQYAAAAAElFTkSuQmCC) repeat scroll transparent\9; /* ie fallback png background image */
+    z-index:10;
+}
+
+
+div#slider figure {
+position: relative; width: 500%;
+margin: 0; padding: 0; font-size: 0; text-align: left;
+}
+
+div#slider figure img { width: 20%; height: auto; float: left; }
+div#slider { width: 96%;max-height:500px; overflow: hidden }
+
+@keyframes slidy {
+0% { left: 0%; }
+20% { left: 0%; }
+25% { left: -100%; }
+45% { left: -100%; }
+50% { left: -200%; }
+70% { left: -200%; }
+75% { left: -300%; }
+95% { left: -300%; }
+100% { left: -400%; }
+}
+
+div#slider figure {
+position: relative; width: 500%;
+margin: 0; padding: 0; font-size: 0; left: 0; text-align: left;
+animation: 20s slidy infinite;
+}
+
+.box{
+	 position: absolute;
+	 top: 20%;
+	 left:30%;
+	 margin-top: -50px;
+	 margin-left: -50px;
+     border: 1px solid #ccc;
+     background-color: #f3f3f3;
+	 background-image: linear-gradient(to bottom,#30F2F2,#FCFCFC);
+     background-attachment: fixed;
+     background-repeat: repeat-x;   
+     border-radius: 10px; 
+     width : 50%;
+     padding:10px;
+}
+
+
+
+.animation-fadeInDown-fadeOutDown.ng-hide-add,
+.animation-fadeInDown-fadeOutDown.ng-hide-remove {
+  display:block!important;
+}
+
+.animation-fadeInDown-fadeOutDown.ng-hide-add {
+  opacity : 1;
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-name: fadeOutDown;
+  -moz-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+
+.animation-fadeInDown-fadeOutDown.ng-hide-remove {
+  opacity : 0;
+  -webkit-animation-delay: 1.5s;
+  -moz-animation-delay: 1.5s;
+  animation-delay: 1.5;
+  -webkit-animation-duration: 1.5s;
+  -moz-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-name: fadeInDown;
+  -moz-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+/* Styles go here */
+
+.my-controller {
+  border: 1px solid #fcc;
+  padding: 5px;
+  margin: 3px;
+}
+.my-controller small {
+  color: #c99;
+}
+.other-controller {
+  border: 1px solid #ccf;
+  padding: 5px;
+  margin: 3px;
+}
+.other-controller small {
+  color: #99c;
+}
+.third-controller {
+  border: 1px solid #cfc;
+  padding: 5px;
+  margin: 3px;
+}
+.third-controller small {
+  color: #9c9;
+}
+
+
+#nav-links{
+    float: right;
+}
+.right{
+    float:right;
+}
+
+.left{
+    float:left;
+}
+
+.glass-container{
+    margin: auto;
+/*     border : 1px solid black; */
+    border-radius: 10px;
+    padding: 20px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: inset 0 50px rgba(255,255,255,0.2),
+    inset 0 -15px 30px rgba(0,0,0,0.4),
+    0 5px 10px rgba(0,0,0,0.5);
+}
+
+header{
+min-height: 50px;
+}
+/* Reservation.html */
+
+.reservation-container{
+    margin-left:10%;
+    margin-right:auto;
+    margin-top: 5%;
+    width:50%;
+}
+
+.black-button{
+    background-image: linear-gradient(to bottom,#3c3c3c 0,#222 100%);
+    background-color:#3c3c3c;
+}
+.black-button:hover{
+    background-color:#3c3c3c ;
+}
+
+.btn-link{
+    color: #3c3c3c;
+}
+
+
+/* Login.html */
+.login-container{
+    margin-left: auto;
+    margin-right:auto;
+    margin-top:10%;
+    width:50%;
+}
+
+/* home.html */
+.no-margin{
+    margin:0px;
+}
+
+.col-center{
+    margin:0 auto;
+    display:inline-block;
+}
+.no-pad{
+    padding: 0px;
+}
+
+.dashboard-content{
+    float:right;
+    width:84%;
+}
+
+.horizontal-center{
+    align-content: center;
+}
+.sidebar-wrapper{
+    position:fixed;
+    height:100%;
+    width:15%;
+    background :#333;
+    transition:all 0.5s ease;
+}
+
+.tab-div{
+    border:none;
+    width:95%;
+}
+
+.sidebar-list>li{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.sidebar-list>li.active{
+    color:#fff;
+    background-color: #454444 !important;
+}
+
+.sidebar-list a{
+    color: #999;
+}
+.sidebar-list a:hover{
+    color:#fff;
+    background-color: #454444 !important;
+}
+
+.pagination>.active>a{
+    color:#fff;
+    background-color: #383838;
+    border-color: #383838;
+}
+
+.pagination>li>a{
+    color:#383838;
+}
+
+.nav-tabs{
+	
+}
+.adjust_top{
+    margin-top: 30px;
+}
+
+#seating .seats {
+    width: 120px;
+    height: 120px;
+    background: #88959C;
+    margin: 10px auto;
+    padding-top: 20px;
+}
+
+.brktxt{
+    word-break:break-all;
+    white-space: pre-line;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.help-block{
+    color: #326363;
+}
+
+.shadow{
+	box-shadow: inset 0 50px rgba(255,255,255,0.2),
+ inset 0 -15px 30px rgba(0,0,0,0.4),
+ 0 5px 10px rgba(0,0,0,0.5);
+}
+
+.label-font{
+	font-weight:700;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
+    color: #555;
+    background-color: #B8F9F9;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: pointer;
+}
+
+@media screen and (max-width:768px){
+#nav-links{
+    float: none;
+}
+
+    .reservation-container{
+        margin-left:auto;
+        margin-right:auto;
+        margin-top: 5%;
+        width:80%;
+    }
+
+    .login-container{
+        margin-left: auto;
+        margin-right:auto;
+        margin-top:10%;
+        width:80%;
+    }
+
+    .sidebar-wrapper{
+        width:20%;
+    }
+    .tab-div{
+        width:75%;
+    }
+}

@@ -1,0 +1,496 @@
+<div>
+    <div class="sidebar-wrapper">
+        <nav class=" navbar-inverse nav-sidebar no-margin">
+            <ul class="nav tabs sidebar-list">
+                <li ng-class="{'active': ownerProfileVm.select == 'true' || ownerDashboardVm.select =='true'}"><a href="#tab1" data-toggle="tab">My profile</a></li>
+                <li ng-class="{'active': ownerReserveVm.select === 'true'}"><a href="#tab2" data-toggle="tab">Reservations</a></li>
+                <li ng-class="{'active': ownerSeatingVm.select === 'true'}"><a href="#tab3" data-toggle="tab">Seating Arrangements</a></li>
+                <li ng-class="{'active': ownerContactVm.select === 'true'}"><a href="#tab4" data-toggle="tab">Contacts</a></li>
+
+            </ul>
+        </nav>
+    </div>
+    <div class="tab-content dashboard-content right">
+        <div class="tab-pane" ng-class="{'active': ownerProfileVm.select == 'true' || ownerDashboardVm.select =='true'}" id="tab1">
+            <h2>Profile Information : </h2>
+            <div ng-show="ownerProfileVm.status"><p class="help-block">{{ownerProfileVm.message}}</p></div>
+            <div class="glass-container container tab-div" id="my_profile">
+                <form role="form" novalidate name="profileForm" ng-submit="ownerProfileVm.submitForm(profileForm.$valid)">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group ">
+                                <label for="profilePicture">Profile picture :</label>
+                                <img src="images/profile-img.gif" id="profilePicture"  class="img-thumbnail "/>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="name">Name :</label>
+                                <input type="text" class="form-control" id="name" name="name" ng-model="ownerProfileVm.user.name" placeholder="name">
+                                <div ng-show="profileForm.name.$dirty" ng-messages="profileForm.name.$error">
+					                <p ng-message="required" class="help-block">Name is required!</p>
+					            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Email :</label>
+                                <input type="email" class="form-control" id="username" name="username" ng-model="ownerProfileVm.user.username"  placeholder="Email address">
+                                 <div ng-show="profileForm.username.$dirty" ng-messages="profileForm.username.$error">
+					                <p ng-message="required" class="help-block">Email is required!</p>
+					                <p ng-message="email" class="help-block">Email is not valid!</p>
+					            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone">Phone :</label>
+                                <input type="tel" class="form-control" id="phone" ng-model="ownerProfileVm.user.phone" name="phone" placeholder="Phone number">
+                                <div ng-show="profileForm.phone.$dirty" ng-messages="profileForm.phone.$error">
+					                <p ng-message="required" class="help-block">Phone number is required!</p>
+					            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="position">Position :</label>
+                                <input type="text" class="form-control" id="position" ng-model="ownerProfileVm.user.position" name="position" placeholder="Owner">
+                                <div ng-show="profileForm.position.$dirty" ng-messages="profileForm.position.$error">
+					                <p ng-message="required" class="help-block">Position is required!</p>
+					            </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label for="address">Address :</label>
+                                <input type="text" class="form-control" id="address" ng-model="ownerProfileVm.user.address" name="address" placeholder="Enter your Address">
+                                <div ng-show="profileForm.address.$dirty" ng-messages="profileForm.address.$error">
+					                <p ng-message="required" class="help-block">Address is required!</p>
+					            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="state">State :</label>
+                                <input type="text" class="form-control" id="state" ng-model="ownerProfileVm.user.state" name="state" placeholder="State">
+                                 <div ng-show="profileForm.state.$dirty" ng-messages="profileForm.state.$error">
+					                <p ng-message="required" class="help-block">State is required!</p>
+					            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="city">City :</label>
+                                <input type="text" class="form-control" id="city" ng-model="ownerProfileVm.user.city" name="city" placeholder="City">
+                                  <div ng-show="profileForm.address.$dirty" ng-messages="profileForm.address.$error">
+					                <p ng-message="required" class="help-block">City is required!</p>
+					            </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="zip">Zip :</label>
+                                <input type="zip" class="form-control" id="zip" ng-model="ownerProfileVm.user.zip" name="zip" placeholder="Zip code" ng-pattern="/^[0-9]{5}$/">
+                                 <div ng-show="profileForm.zip.$dirty" ng-messages="profileForm.zip.$error">
+					                <p ng-message="required" class="help-block">Address is required!</p>
+					                <p ng-message="pattern" class="help-block">Zipcode must be 5 digits!</p>
+					            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <button type="submit"  class="btn btn-primary btn-lg btn-block black-button" id="profileUpdate" >Update Personal Information</button>
+                            </div>
+                        </div>
+                    </div>
+				</form>
+				
+				 <form role="form" novalidate name="updatePasswordForm" ng-submit="ownerProfileVm.passWordUpdate(updatePasswordForm.$valid)">
+                    <div class="row">
+                        <h3>Change Password :</h3>
+                        <div ng-show="ownerProfileVm.status2"><p class="help-block">{{ownerProfileVm.message2}}</p></div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="oldPassword">Old password :</label>
+                                <input type="password" class="form-control" id="oldPassword" name="oldPassword" ng-model="ownerProfileVm.user.oldPassword" placeholder="Old Password">
+                                <div ng-show="updatePasswordForm.oldPassword.$dirty" ng-messages="updatePasswordForm.oldPassword.$error">
+					                <p ng-message="required" class="help-block">Old Password is required!</p>
+					            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="newPassword">New password :</label>
+                                <input type="password" class="form-control" id="newPassword" name="newPassword" ng-model="ownerProfileVm.user.newPassword" placeholder="New Password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/">
+                                <div ng-show="updatePasswordForm.newPassword.$dirty" ng-messages="updatePasswordForm.newPassword.$error">
+					                <p ng-message="required" class="help-block">New Password is required!</p>
+					                <p ng-message="pattern" class="help-block">New Password should be alphanumeric with minimum 8 characters!</p>
+					            </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label></label>
+                                <button type="submit"  class="btn btn-primary btn-block black-button" id="changePassword" >Update</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+				</form>
+            </div>
+        </div>
+        <div class="tab-pane" ng-class="{'active': ownerReserveVm.select === 'true'}" id="tab2">
+            <h2>Reservation List:</h2>
+            <div class="glass-container container tab-div" id="reservation">
+                <div class="input-group">
+                    <input type="text" class="form-control" ng-model="ownerReserveVm.searchText" placeholder="Search Reservation" id="inputSearch">
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary black-button" type="submit"><i class="glyphicon glyphicon-search"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- <ul class="pull-right">
+                    <li><a href="#">&laquo;</a>
+                    </li>
+                    <li class="active"><a href="#">1</a>
+                    </li>
+                    <li><a href="#">2</a>
+                    </li>
+                    <li><a href="#">3</a>
+                    </li>
+                    <li><a href="#">4</a>
+                    </li>
+                    <li><a href="#">5</a>
+                    </li>
+                    <li><a href="#">&raquo;</a>
+                    </li>
+                </ul> -->
+                <dir-pagination-controls class="pull-right" boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="./templates/mainTemplates/ownerTemplates/dirPagination.tpl.html"></dir-pagination-controls>
+                <table class="table table-condensed table-striped">
+                    <thead>
+                    <tr>
+                        <th>CNF#</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Table</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    	<tr dir-paginate="eachReservation in ownerReserveVm.data | filter: ownerReserveVm.searchText | itemsPerPage: 10">
+                    	<td>CNF{{eachReservation.reserve_id}}</td>
+                    	<td>{{eachReservation.name}}</td>
+                    	<td>{{eachReservation.date}}</td>
+                    	<td>{{eachReservation.reserve_table_id}}</td>
+                    	<td> <button type="button" ng-click="ownerReserveVm.getReservation(eachReservation.reserve_id,eachReservation.email)" class="btn btn-primary black-button"><span class="glyphicon glyphicon-share"></span>Details</button></td>
+                    	</tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane"  ng-class="{'active': ownerSeatingVm.select === 'true'}" id="tab3">
+            <h2>Seating Arrangements :</h2>
+            <div class="glass-container container tab-div" id="seating">
+            	<div class="container">
+            		<form class="form-inline" name="ownerSeatingForm">
+					  <div class="form-group">
+					    <label for="date">Date</label>
+					    <input type="date" class="form-control" id="date" ng-model="ownerSeatingVm.entry.date">
+					    <div ng-show="ownerSeatingForm.date.$dirty" ng-messages="ownerSeatingForm.date.$error">
+				                <p ng-message="required" class="help-block">Date is required!</p>
+				         </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="seattime">Time</label>
+					    <input type="time" class="form-control" id="time" name="seattime" ng-model = "ownerSeatingVm.entry.time">
+					    <div ng-show="ownerSeatingForm.seattime.$dirty" ng-messages="ownerSeatingForm.seattime.$error">
+				                <p ng-message="required" class="help-block">Time is required!</p>
+				            </div>
+					  </div>
+					  <button type="button" ng-click="ownerSeatingVm.submitEntry()" class="btn btn-default black-button"><i class="glyphicon glyphicon-search"></i></button>
+					</form>
+            	</div>
+            
+                <div class="container">
+                    <div class=" col-sm-10">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                            <tr>
+                                <th>Table#</th>
+                                <th>Size</th>
+                                <th>Status</th>
+                                <th>Name</th>
+                                <th>CNF#</th>
+								<th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat = "seat in ownerSeatingVm.data ">
+                                <td>{{seat.table_name}}</td>
+                                <td>{{seat.table_capacity}}</td>
+                                <td>{{seat.status}}</td>
+                                <td>{{seat.name}}</td>
+                                <td><div ng-show="seat.reserve_id">CNF{{seat.reserve_id}}</div></td>
+                                <td>
+                                    <button type="button" ng-click="ownerSeatingVm.selectSeat(seat)" class="btn  btn-primary black-button">Add/Edit</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       	<div class="tab-pane" ng-class="{'active': ownerContactVm.select === 'true'}">
+       		<h2>Contacts :</h2>
+       		<div class="glass-container container tab-div">
+                <div class="container">
+                    <div class=" col-sm-10">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                            <tr>
+                                <th>Name#</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat = "person in ownerContactVm.people ">
+                                <td>{{person.name}}</td>
+                                <td>{{person.email}}</td>
+                                <td>{{person.phone}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+       	</div>
+    </div>
+    
+    <div class="overlay" ng-show="ownerReserveVm.overlay == true || ownerSeatingVm.overlay == true">
+    	<div class="container box" ng-show="ownerReserveVm.overlay">
+    		<div >
+    		<div class="row"><span ng-click="ownerReserveVm.overlayClose()" style="float:right;z-index:20;padding-right:10px;cursor: pointer;" class="glyphicon glyphicon-remove"></span></div>
+			<div ng-show="ownerReserveVm.authFail"><p class="help-block">{{ownerReserveVm.message}}</p></div>
+			<div ng-show="ownerReserveVm.authFail2"><p class="help-block">{{ownerReserveVm.confirmationMessage}}</p></div>
+		    <form role="form" name="OwnerReserveForm" novalidate ng-submit="ownerReserveVm.editForm(OwnerReserveForm.$valid)">
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveDate">Date :</label>
+		                    <input type="date" class="form-control" name="reserveDate" ng-model="ownerReserveVm.details.date" id="reserveDate" placeholder="MM/DD/YYYY">
+		                    <div ng-show="OwnerReserveForm.reserveDate.$dirty" ng-messages="OwnerReserveForm.reserveDate.$error">
+				                <p ng-message="required" class="help-block">Date is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveTime">Time :</label>
+		                    <input type="time" class="form-control" name="reserveTime" ng-model="ownerReserveVm.details.time" id="reserveTime" placeholder="HH:MM">
+		                    <div ng-show="OwnerReserveForm.reserveTime.$dirty" ng-messages="OwnerReserveForm.reserveTime.$error">
+				                <p ng-message="required" class="help-block">Time is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveName">Name :</label>
+		                    <input type="text" class="form-control" name="reserveName" ng-model="ownerReserveVm.details.name" id="reserveName" placeholder="Enter your name" readonly>
+		                    <div ng-show="OwnerReserveForm.reserveName.$dirty" ng-messages="OwnerReserveForm.reserveName.$error">
+				                <p ng-message="required" class="help-block">Name is required!</p>
+				            </div>
+		                </div>
+		            </div>
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reserveEmail">Email :</label>
+		                    <input type="email" class="form-control" name="reserveEmail" ng-model="ownerReserveVm.details.email" id="reserveEmail" placeholder="Enter your email address" readonly>
+		                    <div ng-show="OwnerReserveForm.reserveEmail.$dirty" ng-messages="OwnerReserveForm.reserveEmail.$error">
+				                <p ng-message="required" class="help-block">Email is required!</p>
+				                <p ng-message="email" class="help-block">Email is invalid!</p>
+				            </div>		                
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="reservePhone">Phone :</label>
+		                    <input type="tel" class="form-control" id="reservePhone" name="reservePhone" ng-model="ownerReserveVm.details.phone" placeholder="Enter your phone number" ng-pattern="/^[0-9]{10}$/" readonly>
+		                    <div ng-show="OwnerReserveForm.reservePhone.$dirty" ng-messages="OwnerReserveForm.reservePhone.$error">
+				                <p ng-message="required" class="help-block">Phone is required!</p>
+				                <p ng-message="pattern" class="help-block">Phone number should be 10 digits!</p>
+				            </div>			                    
+		                </div>
+		            </div>
+		            
+		             <div class="col-sm-6">
+		                <div class="form-group">
+		                    <label for="cnfCode">Confirmation Code :</label>
+		                    <input type="tel" class="form-control" id="cnfCode" name="cnfCode" ng-model="ownerReserveVm.details.cnfCode" placeholder="CNF#" readonly>		                    
+		                </div>
+		            </div>
+		        </div>
+		
+		        <div class="row">
+		
+		        </div>
+		
+		        <div class="row">
+		            <div class="col-sm-3">
+		                <div class="form-group">
+		                    <label for="reserveSize">Party Size :</label>
+		                    <input type="number" class="form-control" ng-model="ownerReserveVm.details.size" name="reserveSize" id="reserveSize" placeholder="0">
+		                    <div ng-show="OwnerReserveForm.reserveSize.$dirty" ng-messages="OwnerReserveForm.reserveSize.$error">
+				                <p ng-message="required" class="help-block">Party size is required!</p>
+				            </div>			                
+		                </div>
+		            </div>
+		            <div class="col-sm-9">
+		                <div class="form-group">
+		                    <label for="reserveNeed">Special Arrangement :</label>
+		                    <input type="text" class="form-control" ng-model="ownerReserveVm.details.special_arrangement" id="reserveNeed" placeholder="Birthday,Anniversary etc.">
+		                </div>
+		            </div>
+		        </div>
+		        <div class="row">
+		            <div class="col-sm-6">
+		                <button type="submit" ng-click="ownerReserveVm.editReservation()" class="btn btn-primary btn-lg btn-block black-button" id="editButton" >Edit Reservation</button>
+		            </div>
+		            <div class="col-sm-6">
+		                <button type="submit" ng-click="ownerReserveVm.cancelReservation()" class="btn btn-primary btn-lg btn-block black-button" id="cancelButton" >Cancel Reservation</button>
+		            </div>
+		        </div>
+		
+		    </form>
+			</div>
+    	
+    	</div>
+    	<div class="container box" ng-show="ownerSeatingVm.overlay">
+				
+			<div >
+	    		<div class="row"><span ng-click="ownerSeatingVm.overlayClose()" style="float:right;z-index:20;padding-right:10px;cursor: pointer;" class="glyphicon glyphicon-remove"></span></div>
+				<div ng-show="ownerSeatingVm.authFail"><p class="help-block">{{ownerSeatingVm.message}}</p></div>
+				<div ng-show="ownerSeatingVm.authFail2"><p class="help-block">{{ownerSeatingVm.confirmationMessage}}</p></div>
+			    <form role="form" name="OwnerSeatingForm" novalidate ng-submit="ownerSeatingVm.editForm(OwnerSeatingForm.$valid)">
+			        <div class="row">
+			            <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="reserveDate">Date :</label>
+			                    <input type="date" class="form-control" name="reserveDate" ng-model="ownerSeatingVm.seat.reserve_date" id="reserveDate" placeholder="MM/DD/YYYY">
+			                    <div ng-show="OwnerSeatingForm.reserveDate.$dirty" ng-messages="OwnerSeatingForm.reserveDate.$error">
+					                <p ng-message="required" class="help-block">Date is required!</p>
+					            </div>
+			                </div>
+			            </div>
+			            <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="reserveTime">Time :</label>
+			                    <input type="time" class="form-control" name="reserveTime" ng-model="ownerSeatingVm.seat.time_from" id="reserveTime" placeholder="HH:MM">
+			                    <div ng-show="OwnerSeatingForm.reserveTime.$dirty" ng-messages="OwnerSeatingForm.reserveTime.$error">
+					                <p ng-message="required" class="help-block">Time is required!</p>
+					            </div>
+			                </div>
+			            </div>
+			        </div>
+			
+			        <div class="row">
+			            <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="reserveName">Name :</label>
+			                    <input type="text" class="form-control" name="reserveName" ng-model="ownerSeatingVm.seat.name" id="reserveName" placeholder="Enter your name" >
+			                    <div ng-show="OwnerSeatingForm.reserveName.$dirty" ng-messages="OwnerSeatingForm.reserveName.$error">
+					                <p ng-message="required" class="help-block">Name is required!</p>
+					            </div>
+			                </div>
+			            </div>
+			            <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="reserveEmail">Email :</label>
+			                    <input type="email" class="form-control" name="reserveEmail" ng-model="ownerSeatingVm.seat.email" id="reserveEmail" placeholder="Enter your email address" >
+			                    <div ng-show="OwnerSeatingForm.reserveEmail.$dirty" ng-messages="OwnerSeatingForm.reserveEmail.$error">
+					                <p ng-message="required" class="help-block">Email is required!</p>
+					                <p ng-message="email" class="help-block">Email is invalid!</p>
+					            </div>		                
+			                </div>
+			            </div>
+			        </div>
+			
+			        <div class="row">
+			            <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="reservePhone">Phone :</label>
+			                    <input type="tel" class="form-control" id="reservePhone" name="reservePhone" ng-model="ownerSeatingVm.seat.phone" placeholder="Enter your phone number" ng-pattern="/^[0-9]{10}$/" >
+			                    <div ng-show="OwnerSeatingForm.reservePhone.$dirty" ng-messages="OwnerSeatingForm.reservePhone.$error">
+					                <p ng-message="required" class="help-block">Phone is required!</p>
+					                <p ng-message="pattern" class="help-block">Phone number should be 10 digits!</p>
+					            </div>			                    
+			                </div>
+			            </div>
+			            
+			             <div class="col-sm-6">
+			                <div class="form-group">
+			                    <label for="cnfCode">Confirmation Code :</label>
+			                    <input type="tel" class="form-control" id="cnfCode" name="cnfCode" ng-model="ownerSeatingVm.seat.cnfCode" placeholder="CNF#" readonly>		                    
+			                </div>
+			            </div>
+			        </div>
+			
+			        <div class="row">
+			
+			        </div>
+			
+			        <div class="row">
+			            <div class="col-sm-3">
+			                <div class="form-group">
+			                    <label for="reserveSize">Party Size :</label>
+			                    <input type="number" class="form-control" ng-model="ownerSeatingVm.seat.no_of_people" name="reserveSize" id="reserveSize" placeholder="0">
+			                    <div ng-show="OwnerSeatingForm.reserveSize.$dirty" ng-messages="OwnerSeatingForm.reserveSize.$error">
+					                <p ng-message="required" class="help-block">Party size is required!</p>
+					            </div>			                
+			                </div>
+			            </div>
+			            <div class="col-sm-9">
+			                <div class="form-group">
+			                    <label for="reserveNeed">Special Arrangement :</label>
+			                    <input type="text" class="form-control" ng-model="ownerSeatingVm.seat.special_arrangement" id="reserveNeed" placeholder="Birthday,Anniversary etc.">
+			                </div>
+			            </div>
+			        </div>
+			        <div class="row">
+			            <div class="col-sm-6">
+			                <button type="submit" ng-click="ownerSeatingVm.editReservation()" class="btn btn-primary btn-lg btn-block black-button" id="editButton" >Edit Reservation</button>
+			            </div>
+			            <div class="col-sm-6">
+			                <button type="submit"ng-show="ownerSeatingVm.seat.reserve_id" ng-click="ownerSeatingVm.cancelReservation()" class="btn btn-primary btn-lg btn-block black-button" id="cancelButton" >Cancel Reservation</button>
+			            </div>
+			        </div>
+			
+			    </form>
+			</div>
+				
+    	</div>
+    </div>
+    
+    <div class="clearfix"></div>
+</div>

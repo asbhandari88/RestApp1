@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="restaurant">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>India Cafe</title>
+    <link rel="stylesheet" type="text/css" href="styles/lib/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script type="text/javascript" src="scripts/lib/jquery-1.11.0.min.js" ></script>
+    <script type="text/javascript" src="scripts/lib/bootstrap.min.js" ></script>
+    <script src="https://code.angularjs.org/1.4.3/angular.js" ></script>
+    <script src="https://code.angularjs.org/1.4.3/angular-messages.js" ></script>
+    <script src="https://code.angularjs.org/1.4.3/angular-route.js" ></script>
+    <script type="text/javascript" src="scripts/lib/dirPagination.js" ></script>
+
+</head>
+<body>
+<header>
+
+    <nav class="navbar navbar-inverse no-margin navbar-fixed-top" role="navigation">
+        <div class="container">
+
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#nav-links">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-cutlery"></span> India cafe</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="nav-links">
+                <ul class="nav navbar-nav" ng-init="selectedtab ='home'">
+                    <li ng-class="{'active':selectedTab === 'home'}" ng-click="selectedTab = 'home'"><a href="#/home"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li ng-class="{'active':selectedTab === 'reservation'}" ng-click="selectedTab = 'reservation'"><a href="#/makeReservation"><span class="glyphicon glyphicon-asterisk"></span> Reservation</a></li>
+                    <li ng-class="{'active':selectedTab === 'login'}" ng-click="selectedTab = 'login'"><a href="#/login"> <span class="glyphicon glyphicon-play"></span> Login</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+</header>
+
+<section ng-view>
+
+</section>
+
+<script src="scripts/index.js"></script>
+<script type="text/javascript" src="scripts/mainTemplates/home.js"></script>
+<script type="text/javascript" src="scripts/mainTemplates/login.js"></script>
+<script type="text/javascript" src="scripts/mainTemplates/reservation.js"></script>
+<script type="text/javascript" src="scripts/mainTemplates/ownerDashboard.js"></script>
+<footer>
+
+</footer>
+</body>
+</html>

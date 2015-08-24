@@ -1,0 +1,30 @@
+<div class="container glass-container login-container" >
+    <h1>Login</h1>
+    
+    <div ng-show="loginVm.authFail"><p class="help-block">{{loginVm.message}}</p></div>
+    
+    <form role="form" novalidate name="loginForm" ng-submit="loginVm.submitForm(loginForm.$valid)">
+    	
+        <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" name="username" class="form-control" id="username" placeholder="username@domain.com" ng-model="loginVm.user.username">
+            <div ng-show="loginForm.username.$dirty" ng-messages="loginForm.username.$error">
+                <p ng-message="required" class="help-block">Email is required!</p>
+                <p ng-message="email" class="help-block">Email is not valid!</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" ng-model="loginVm.user.password" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/">
+            <div ng-show="loginForm.password.$dirty" ng-messages="loginForm.password.$error">
+                <p ng-message="required" class="help-block">Password is required!</p>
+                <p ng-message="pattern" class="help-block">Password should be alphanumeric with minimum 8 characters!</p>
+            </div>
+        </div>
+        <div class="text-center">
+            <div class="col-sm-6">
+                 <button type="submit" class="btn btn-primary btn-lg btn-block black-button" id="loginButton" >Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
